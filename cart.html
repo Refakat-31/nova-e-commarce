@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="produts.css">
+</head>
+<body>
+    <header class="navSection">
+        <section class="navbar cointaner">
+            <div class="logo">NOVA</div>
+    
+            <div class="navitems">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li id="dropdown"><button class="dropbtn"><a id="dropbtn" href="product.html">Products</a></button>
+                        <div class="dropdown-content">
+                          <a id="drop" href="product.html">Products</a>
+                          <a id="drop" href="#">Men's clothes</a>
+                          <a id="drop" href="#">Link 3</a>
+                         </div></li>
+                         <li id="dropdown"><button class="dropbtn"><a id="dropbtn" href="contact.html">Contact us</a></button>
+                            <div class="dropdown-content">
+                              <a id="drop" href="#">About</a>
+                              <a id="drop" href="contact.html">Contact</a>
+                              <a id="drop" href="#">Help</a>
+                             </div></li>
+                    <li><a href="cart.html">Cart <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></a></li>
+                    <li id="signup"><a href="">Signup</a></li>
+                    <li id="login"><a href="">Login</a></li>
+                </ul>
+            </div>
+            <div class="hamburger">
+                <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+            </div>
+        </section>
+    </header>
+    <!-- navbar -->
+
+    <section>
+    <header class="cointaner">
+    <h1>Shopping Cart</h1>
+    <section class="cart-container ">
+        <div class="carts"></div>
+    </section>
+    </header>
+    </section>
+
+
+<!-- footer -->
+<div class="myFoot"></div>
+<article class="footer">
+    <div class="footerEleCon cointaner">
+    <div class="headFoot">
+        <span>Follow us</span>
+    </div>
+    <hr>
+    <div class="footContent grid">
+        <ul class="">
+            <li id="firstfootMenu"><a href="">Nova Enterprise</a></li>
+            <li><a href="">Download Nove app</a></li>
+            <li><a href=""></a></li>
+        </ul>
+        <ul class="">
+            <li id="firstfootMenu"><a href="">Products</a></li>
+            <li><a href="">Best sale</a></li>
+            <li><a href="">Nova premium</a></li>
+            <li><a href="">Nova support plan</a></li>
+        </ul>
+        <ul class="">
+            <li id="firstfootMenu"><a href="">Support plan</a></li>
+            <li><a href="">Faster delivery</a></li>
+            <li><a href="">Longer retern plan</a></li>
+            <li><a href="">Better coustomer service</a></li>
+            <li><a href=""></a></li>
+        </ul>
+        <ul class="">
+            <li id="firstfootMenu"><a href="">Support</a></li>
+            <li><a href="">Return</a></li>
+            <li><a href="">Complain</a></li>
+            <li><a href="">Help center</a></li>
+            <li><a href="">Pilicy list</a></li>
+            <li><a href="">FAQ</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="footEnd">
+        <ul class="">
+            <li id="firstfootMenu"><a href="">NOVA</a></li>
+            <li><a href="">About Nova</a></li>
+            <li><a href="">Nova products</a></li>
+            <li><a href="">Policies</a></li>
+            <li><a href="">Terms</a></li>
+            <li id="footNavHelp"><a href="">Help</a></li>
+        </ul>
+    </div>
+</div>
+ </article>
+
+ <!-- footer end -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+hamburger.onclick = () => {
+    console.log('click')
+    navBar = document.querySelector('.navitems');
+    
+    navBar.classList.toggle('active');
+    
+}
+        const loadCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.querySelector(".carts");
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `<p>Your cart is empty.</p>`;
+        return;
+    }
+
+    cartContainer.innerHTML = cart
+        .map(
+            (item) => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.title}" class="cart-item-img">
+                <div class="cart-item-info">
+                    <h4>${item.title}</h4>
+                    <p>Price: $${item.price}</p>
+                    <div class="cart-item-controls">
+                        <button class="decrease" data-id="${item.id}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase" data-id="${item.id}">+</button>
+                        <button class="remove" data-id="${item.id}">Remove</button>
+                    </div>
+                </div>
+            </div>`
+        )
+        .join("");
+
+    addCartEventListeners();
+};
+
+const addCartEventListeners = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.querySelectorAll(".increase").forEach((btn) =>
+        btn.addEventListener("click", (e) => {
+            const id = parseInt(e.target.dataset.id, 10);
+            const product = cart.find((item) => item.id === id);
+            product.quantity += 1;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        })
+    );
+
+    document.querySelectorAll(".decrease").forEach((btn) =>
+        btn.addEventListener("click", (e) => {
+            const id = parseInt(e.target.dataset.id, 10);
+            const product = cart.find((item) => item.id === id);
+            if (product.quantity > 1) {
+                product.quantity -= 1;
+            } else {
+                const index = cart.findIndex((item) => item.id === id);
+                cart.splice(index, 1);
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        })
+    );
+
+    document.querySelectorAll(".remove").forEach((btn) =>
+        btn.addEventListener("click", (e) => {
+            const id = parseInt(e.target.dataset.id, 10);
+            const index = cart.findIndex((item) => item.id === id);
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        })
+    );
+};
+
+// Initialize
+loadCart();
+
+    </script>
+</body>
+</html>

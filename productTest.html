@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            box-sizing: border-box;
+            margin: 0;
+        }
+        .card{
+            width: 15rem;
+            height: 18rem;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin: 1rem 1rem;
+        }
+        .card img{
+            width: 100%;
+            max-height: 10rem;
+            border-radius: 10px;
+        }
+        .proName{
+            font-size: 17px;
+            margin: 0.5rem 0 0 1rem;
+        }
+        .proDis{
+            font-size: 16px;
+            margin: 0.1rem 0 0 1rem;
+        }
+        .price{
+            margin: 0.5rem 0 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-wraper">
+        <label for="">Search</label>
+        <input type="search" id="search">
+    </div>
+    <main class="products" data-user-card-cointaner>
+        <template data-user-template>
+        <div class="card">
+            <img src="" alt="" class="proImg" image-data>
+            <p class="proName" name-data></p>
+            <p class="proDis" discription-data></p>
+            <h3 class="price" price-data></h3>
+        </div>
+    </template>
+    </main>
+    <script>
+        const userCardTemplate = document.querySelector("[data-user-template]")
+        const userCardCointaner = document.querySelector("[data-user-card-cointaner")
+        fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach( product => {
+            const card = userCardTemplate.content.cloneNode(true).children[0]
+            const proImage = card.querySelector("[image-data]")
+            const proName = card.querySelector("[name-data]")
+            const proDis = card.querySelector("[discription-data]")
+            const Price = card.querySelector("[price-data]")
+            proImage.imgContent = product.image
+            proName.textContent = product.title
+            proDis.textContent = product.description
+            Price.textContent = product.price
+            userCardCointaner.append(card)
+            console.log(product)
+        });
+    })
+    </script>
+</body>
+</html>

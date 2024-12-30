@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body id="productBody">
+
+    <div class="outerForm">
+        <form action="" class="cointaner">
+            <input type="text" id="input" placeholder="Search">
+            <svg class="serch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+        </form>
+        </div>
+
+    <section class="card-cointaner cointaner">
+
+    </section>
+
+
+
+
+    <script>
+        const SerchInput = document.querySelector('#input');
+        let cardData = document.querySelector('.card-cointaner')
+
+
+        async function getData(){
+            const res = await fetch("https://fakestoreapi.com/products");
+            if(!res.ok){
+                throw new Error(`Http error: ${res.status}`);
+            }
+            else{
+            let search = SerchInput.value;
+            const data = await res.json();
+            data.filter((eventData) => {
+        if (search === ""){return eventData}
+        else if (eventData.title.toLowerCase().includes(search.      toLowerCase())){return eventData}}).map((ele) => {
+                let CreateDiv = document.createElement('div');
+                let createImgEle = document.createElement('img');
+                let createTitle = document.createElement('p');
+                let createPriceEle = document.createElement('p');
+                let createDescriptionEle = document.createElement('p');
+                let BtnEle = document.createElement('button');
+                let BtnText = document.createTextNode('Add To Cart');
+                let createTextTitle = document.createTextNode(ele.title.slice(0,20));
+                let createPriceTitle = document.createTextNode(`$${ele.price}`);
+                let createDescriptionTitle = document.createTextNode(ele.description.slice(0,36));
+                createImgEle.setAttribute('src', ele.image);
+
+                createImgEle.setAttribute("class", "productImg");
+                createTitle.setAttribute("class", "productName");
+                createDescriptionEle.setAttribute("class", "productDescription");
+                createPriceEle.setAttribute("class", "productPrice");
+                BtnEle.setAttribute("class", "addToCart");
+                CreateDiv.setAttribute("class", "card");
+
+
+                createTitle.appendChild(createTextTitle);
+                createDescriptionEle.appendChild(createDescriptionTitle);
+                createPriceEle.appendChild(createPriceTitle);
+                BtnEle.appendChild(BtnText);
+                CreateDiv.appendChild(createImgEle)
+                CreateDiv.appendChild(createTitle)
+                CreateDiv.appendChild(createDescriptionEle)
+                CreateDiv.appendChild(createPriceEle)
+                CreateDiv.appendChild(BtnEle)
+
+                cardData.appendChild(CreateDiv);
+
+                function addToCart(a,b){
+                    console.log(a)
+                    console.log(b)
+                }
+                BtnEle.addEventListener("click",() => addToCart(ele.image,ele.price));
+            })
+           
+       }}
+        getData()
+        SerchInput.addEventListener("input", () => {
+            getData();
+});
+    </script>
+</body>
+</html>
